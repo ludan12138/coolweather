@@ -5,6 +5,13 @@ import android.text.TextUtils;
 import com.coolweather.android.db.City;
 import com.coolweather.android.db.County;
 import com.coolweather.android.db.Province;
+import com.coolweather.android.gson.Air;
+import com.coolweather.android.gson.Forecast;
+import com.coolweather.android.gson.Location_info;
+import com.coolweather.android.gson.Suggestion;
+import com.coolweather.android.gson.Weather;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,5 +76,70 @@ public class Utility {
             }
         }
         return false;
+    }
+
+    public static Location_info handleLocationResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            //JSONArray jsonArray = jsonObject.getJSONArray("HeLocation");
+            //String locationContent = jsonArray.getJSONObject(0).toString();
+            String locationContent = jsonObject.toString();
+            return new Gson().fromJson(locationContent, Location_info.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Weather handleWeatherResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            //JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            //String weatherContent = jsonArray.getJSONObject(0).toString();
+            String weatherContent = jsonObject.toString();
+            return new Gson().fromJson(weatherContent, Weather.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Suggestion handleSuggestResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            //JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            //String weatherContent = jsonArray.getJSONObject(0).toString();
+            String suggestionContent = jsonObject.toString();
+            return new Gson().fromJson(suggestionContent, Suggestion.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Air handleAirResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            //JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            //String weatherContent = jsonArray.getJSONObject(0).toString();
+            String airContent = jsonObject.toString();
+            return new Gson().fromJson(airContent, Air.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Forecast handleForecastResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            //JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            //String weatherContent = jsonArray.getJSONObject(0).toString();
+            String forecastContent = jsonObject.toString();
+            return new Gson().fromJson(forecastContent, Forecast.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
